@@ -1,0 +1,38 @@
+#Options
+GenerateScanner = true
+GenerateParser = true
+Language = Java
+ScannerName = Lexico
+ParserName = Sintatico
+SemanticName = Semantico
+ScannerCaseSensitive = true
+ScannerTable = Full
+Input = Stream
+Parser = SLR
+#RegularDefinitions
+texto:\"[a-zA-Z0-9\s]*\"
+ignoraveis:[\n\r\s\t]+
+#Tokens
+:{ignoraveis}
+INICIO: "INICIO"
+FIM: "FIM"
+TEXTO: {texto}
+TITULO: "TITULO:"
+IMAGEM: "IMAGEM:"
+LINK: "LINK:"
+BOTAO: "BOTAO:"
+#NonTerminals
+<A>
+<INSTRS>
+<INST>
+<STRING>
+<B>
+
+#Grammar
+<A> ::= INICIO <INSTRS> FIM;
+<INSTRS> ::= <INSTRS> <INST> | <INST>;
+<INST> ::= TITULO <STRING> <B>;
+<B>::=  TEXTO <STRING>;
+<STRING> ::= TEXTO ;
+
+
