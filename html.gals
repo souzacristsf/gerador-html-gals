@@ -5,9 +5,10 @@ Language = Java
 ScannerName = Lexico
 ParserName = Sintatico
 SemanticName = Semantico
+Package = gals
 ScannerCaseSensitive = true
-ScannerTable = Full
-Input = Stream
+ScannerTable = Compact
+Input = String
 Parser = SLR
 #RegularDefinitions
 texto:\"[a-zA-Z0-9\s]*\"
@@ -21,17 +22,16 @@ TITULO: "TITULO:"
 IMAGEM: "IMAGEM:"
 LINK: "LINK:"
 BOTAO: "BOTAO:"
-LABEL: "TEXTO:"
+LABEL: "LABEL:"
 #NonTerminals
 <A>
 <INSTRS>
 <INST>
-<STRING>
+
 
 #Grammar
-<A> ::= INICIO <INSTRS> FIM;
+<A> ::= INICIO #1 <INSTRS> FIM #2;
 <INSTRS> ::= <INSTRS> <INST> | <INST>;
-<INST> ::= TITULO <STRING> | IMAGEM <STRING> | LINK <STRING> | BOTAO <STRING> | LABEL <STRING>;
-<STRING> ::= TEXTO  ;
+<INST> ::= TITULO TEXTO  #3 | IMAGEM TEXTO #4 | LINK TEXTO #5 | BOTAO TEXTO #6 | LABEL TEXTO #7;
 
 
